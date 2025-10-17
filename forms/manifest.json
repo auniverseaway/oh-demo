@@ -1,0 +1,8 @@
+{
+  "schemas": [
+    "get-help-section",
+    "hero-of-the-day",
+    "inputs-test"
+  ],
+  "description": "Example manifest file for schema discovery. This should be placed at the GitHub repository as manifest.json"
+}
