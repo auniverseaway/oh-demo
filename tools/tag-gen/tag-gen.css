@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+ul {
+  margin: 0 0 12px 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #e0e0e0;
+
+  li {
+    padding: 6px 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+.title {
+  margin: 0;
+  padding: 6px 20px;
+  font-weight: 700;
+}
+
+.action-area {
+  padding: 6px 20px;
+}
+
+.status {
+  margin: 0;
+  padding: 6px 20px;
+}
