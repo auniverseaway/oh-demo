@@ -1,6 +1,6 @@
 import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 import { LitElement, html, nothing } from 'da-lit';
-import { loadPageTags, loadGenTags } from './utils.js';
+import { loadPageTags, loadGenTags, savePageTags } from './utils.js';
 
 // Super Lite components
 import 'https://da.live/nx/public/sl/components.js';
@@ -25,15 +25,26 @@ class ADLTagGen extends LitElement {
   }
 
   async getPageTags() {
-    this._status = '';
     this._pageTags = await loadPageTags(this.path, this.token);
     this._status = undefined;
   }
 
   async generateTags() {
-    this._status = 'Reading document and generating tags.';
+    this._status = 'Generating tags...';
     this._genTags = await loadGenTags(this.path, this.token);
     this._status = undefined;
+  }
+
+  async updateTags() {
+    this._status = 'Updating page...'
+    const { message, type } = await savePageTags(this.path, this.token, this._genTags);
+    if (type === 'success') {
+      this._pageTags = [...this._genTags];
+      this._genTags = undefined;
+      this._status = undefined;
+    } else {
+      this._status = message;
+    }
   }
 
   get title() {
@@ -54,17 +65,24 @@ class ADLTagGen extends LitElement {
       </ul>
       <div class="action-area">
       ${this.title === 'Current tags'
-        ? html`<sl-button @click=${this.generateTags}>Generate tags</sl-button>`
+        ? html`<button class="btn-gradient" @click=${this.generateTags}><svg><use href="/tools/tag-gen/genaiinfo.svg#genaiinfo" /></svg> Generate tags</button>`
         : html`<sl-button @click=${this.updateTags}>Save tags</sl-button>`}
       </div>
     `;
   }
 
   renderStatus() {
-    return html`<p class="status">${this._status}</p>`;
+    return html`
+      <div class="status-container">
+        <svg><use href="/tools/tag-gen/genaiinfo.svg#genaiinfo" /></svg>
+        <p class="status">${this._status}</p>
+      </div>
+    `;
   }
 
   render() {
+    if (!(this._genTags || this._pageTags || this._status)) return nothing;
+
     return html`
       ${this._status !== undefined ? this.renderStatus() : this.renderTags()}
     `;
