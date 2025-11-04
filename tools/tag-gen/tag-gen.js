@@ -59,7 +59,7 @@ class ADLTagGen extends LitElement {
     if (!this.tags) return nothing;
 
     return html`
-      <p class="title">${this.title}</p>
+      <p class="title ${this._genTags ? 'generated' : ''}">${this.title}</p>
       <ul>
         ${this.tags.map((tag) => html`<li>${tag}</li>`)}
       </ul>

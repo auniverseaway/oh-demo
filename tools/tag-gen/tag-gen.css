@@ -30,6 +30,13 @@ ul {
   margin: 0 0 6px 0;
   padding: 6px 20px;
   font-weight: 700;
+
+  &.generated {
+    background-image: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, #3b63fb 100%);
+    color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .action-area {
@@ -55,7 +62,7 @@ ul {
     background-image: linear-gradient(95.85deg, #b539c8 0%, #7155fa 66%, #3b63fb 100%);
     border: 2px solid transparent;
     font-family: var(--font-family);
-    border-radius: var(--s2-border-radius);
+    border-radius: 18px;
     outline-color: var(--s2-blue-900);
     outline-offset: 0;
     transition: outline-offset 0.2s;
